@@ -28,6 +28,7 @@ class Observable<T> extends EventTarget {
             switch (callback.length) {
                 case 1:
                     this.addEventListener('dataChanged', () => callback(this.#value))
+                    break
                 case 2:
                     this.addEventListener('dataChanged', (event) => callback(event, this.#value))
                     break

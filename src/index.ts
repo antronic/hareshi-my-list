@@ -153,6 +153,7 @@ const loadMyList = () => {
         saveToggleButton.style.background = 'var(--primary)'
         saveToggleButton.style.color = '#fff'
         saveToggleButton.style.borderRadius = '.25rem'
+        saveToggleButton.style.marginRight = '4px'
 
         const pageInfo = getPageInfo()
         saveToggleButton.innerText = pageInfo.isSamePage ? '✅ Saved' : '➕ Save'
@@ -174,9 +175,11 @@ const loadMyList = () => {
         const underCoverMenu = document.createElement('DIV')
         underCoverMenu.appendChild(saveToggleButton)
 
+        // I commented it because ... this component won't load during first paint
         // const coverImgParent = document.querySelector<HTMLDivElement>('.info .img-cover')!.parentNode!
         // const coverImgParent = document.querySelector<HTMLDivElement>('.info .info-col')
         // coverImgParent!.appendChild(underCoverMenu)
+
         toolbar.appendChild(saveToggleButton)
     }
 
@@ -189,7 +192,7 @@ const loadMyList = () => {
         toolbar.style.borderRadius = '.25rem'
 
         const title = document.createElement('span')
-        title.innerText = 'Saved'
+        title.innerText = 'Saved list'
 
         toolbar.appendChild(title)
 

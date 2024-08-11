@@ -13,7 +13,7 @@ However, it doesn’t include a “favorite” or "saved list" feature, which is
 - [Upcoming - when I'm not lazy] - Hide or collapse the list
 
 ## 🪲 Known bugs
-- [ ] List doesn't update on page changed ([Issue#1](https://github.com/antronic/hareshi-my-list/issues/1))
+- [x] ~~List doesn't update on page changed~~ ([Issue#1](https://github.com/antronic/hareshi-my-list/issues/1)) **(Fix with experimental [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API))
 
 ## Usage
 

@@ -8,8 +8,9 @@ echo -e "// ==UserScript==
 // @version      $(date '+%Y-%m-%d')
 // @author       Jirachai Chansivanon
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=hareshi.net
-// @downloadURL  https://raw.githubusercontent.com/antronic/hareshi-my-list/main/build/hareshi-my-list.tampermonkey.min.js
-// @version      0.2
+// @updateURL    https://github.com/antronic/hareshi-my-list/raw/main/build/hareshi-my-list.min.user.js
+// @downloadURL  https://github.com/antronic/hareshi-my-list/raw/main/build/hareshi-my-list.min.user.js
+// @version      0.3
 // @grant        none
 // ==/UserScript==
 \n$(cat build/hareshi-my-list.min.js)

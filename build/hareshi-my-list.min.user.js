@@ -3,7 +3,7 @@
 // @match        https://www.hareshi.net/*
 // @description  Hareshi's Saved list
 // @namespace    jirachai.me
-// @version      2024_08_11-04
+// @version      2024_08_11-05
 // @author       Jirachai Chansivanon
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=hareshi.net
 // @updateURL    https://github.com/antronic/hareshi-my-list/raw/main/build/hareshi-my-list.min.user.js
@@ -22,25 +22,28 @@ toJSON(){return __classPrivateFieldGet(this,_Observable_value,"f");}}
 _Observable_value=new WeakMap();const loadMyList=()=>{let animeStorage=null;function validateStructure(storageStructure){if(storageStructure===undefined){return false;}
 if(!Array.isArray(storageStructure.savedList)){return false;}
 return true;}
-function getStorage(){const DEFAULT_STRORAGE={savedList:[]};const storage=localStorage.getItem('hareshi_animate_storage');let parsedStorage=DEFAULT_STRORAGE;if(storage!==null){try{parsedStorage=Object.assign({},JSON.parse(storage));console.log('after parsedStorage',parsedStorage);if(!validateStructure(parsedStorage)){throw new Error('Invalid storage structure');}}
+function getStorage(){const DEFAULT_STRORAGE={savedList:[]};const storage=localStorage.getItem('hareshi_animate_storage');let parsedStorage=DEFAULT_STRORAGE;if(storage!==null){try{parsedStorage=Object.assign({},JSON.parse(storage));if(!validateStructure(parsedStorage)){throw new Error('Invalid storage structure');}}
 catch(e){console.log(e);parsedStorage=DEFAULT_STRORAGE;}}
-console.log('parsedStorage',parsedStorage);const _savedList=new Observable(parsedStorage.savedList);animeStorage=Object.assign(Object.assign({},parsedStorage),{savedList:_savedList});}
+const _savedList=new Observable(parsedStorage.savedList);animeStorage=Object.assign(Object.assign({},parsedStorage),{savedList:_savedList});}
 function saveStorage(){localStorage.setItem('hareshi_animate_storage',JSON.stringify(animeStorage));}
 function createAnimeData(){const coverImage=document.querySelector('.info .img-cover').src;const title=document.querySelector('.info #anipop.title').innerText;const animeId=window.location.pathname.split('/')[3];const host=window.location.hostname;const path=window.location.pathname;return{title,coverImage,animeId,host,path};}
-function addToSavedList(anime){if(animeStorage.savedList.get().findIndex((i)=>i.animeId===anime.animeId)>-1){console.log('Already exists');return;}
+function addToSavedList(anime){if(animeStorage.savedList.get().findIndex((i)=>i.animeId===anime.animeId)>-1){return;}
 animeStorage.savedList.update((saved)=>[...saved,anime]);saveStorage();}
 function removeFromSaveList(storageIndex){const pageInfo=getPageInfo();const index=storageIndex===undefined?pageInfo.storageIndex:storageIndex;animeStorage.savedList.update((saved)=>[...saved.slice(0,index),...saved.slice(index+1),]);saveStorage();}
-const toolbarHeader=document.createElement('div');function injectSaveButton(){const saveToggleButton=document.createElement('BUTTON');saveToggleButton.style.background='var(--primary)';saveToggleButton.style.color='#fff';saveToggleButton.style.borderRadius='.25rem';saveToggleButton.style.marginRight='4px';const pageInfo=getPageInfo();saveToggleButton.innerText=pageInfo.isSamePage?'✅ Saved':'➕ Save';animeStorage===null||animeStorage===void 0?void 0:animeStorage.savedList.onChange(()=>{const pageInfo=getPageInfo();saveToggleButton.innerText=pageInfo.isSamePage?'✅ Saved':'➕ Save';});saveToggleButton.addEventListener('click',()=>{const pageInfo=getPageInfo();if(pageInfo.isSamePage){removeFromSaveList();}
+const toolbarHeader=document.createElement('div');function injectSaveButton(){const saveToggleButton=document.createElement('BUTTON');saveToggleButton.style.background='var(--primary)';saveToggleButton.style.color='#fff';saveToggleButton.style.borderRadius='.25rem';saveToggleButton.style.marginRight='4px';function renderSaveButton(){const pageInfo=getPageInfo();if(pageInfo.type===PAGE_TYPE.ANIME_PAGE){saveToggleButton.style.display='inline-block';}
+else{saveToggleButton.style.display='none';}}
+function renderSaveText(){const pageInfo=getPageInfo();saveToggleButton.innerText=pageInfo.isSamePage?'✅ Saved':'➕ Save';}
+renderSaveButton();renderSaveText();onLocationChange((ev)=>{const destinationUrl=new URL(ev.destination.url);if(checkWeb(destinationUrl.pathname)===PAGE_TYPE.ANIME_PAGE){saveToggleButton.style.display='inline-block';}
+else{saveToggleButton.style.display='none';}
+renderSaveText();});animeStorage===null||animeStorage===void 0?void 0:animeStorage.savedList.onChange(renderSaveText);saveToggleButton.addEventListener('click',()=>{const pageInfo=getPageInfo();if(pageInfo.isSamePage){removeFromSaveList();}
 else{addToSavedList(createAnimeData());}});const underCoverMenu=document.createElement('DIV');underCoverMenu.appendChild(saveToggleButton);toolbarHeader.appendChild(saveToggleButton);}
-function injectToolbar(){const toolbar=document.createElement('div');toolbar.style.position='fixed';toolbar.style.top='72px';toolbar.style.right='16px';toolbar.style.background='var(--primary)';toolbar.style.borderRadius='.25rem';toolbar.style.boxShadow='0 0 4px 0px rgba(0,0,0,0.25)';toolbar.style.overflow='auto';const title=document.createElement('span');title.innerText='Saved list';toolbarHeader.appendChild(title);toolbarHeader.style.padding='0px 4px';toolbar.appendChild(toolbarHeader);const savedListContainer=document.createElement('DIV');savedListContainer.style.background='#fff';savedListContainer.style.padding='2px';function renderSavedList(){const list=animeStorage.savedList.get();savedListContainer.innerHTML='';list.forEach((item,index)=>{const title=document.createElement('a');title.innerText=item.title;title.href=`${item.path}`;title.style.marginBottom='4px';title.style.paddingRight='2px';const delButton=document.createElement('button');delButton.innerText='🗑️';delButton.style.border='none';delButton.style.marginRight='2px';delButton.setAttribute('index',index.toString());delButton.addEventListener('click',()=>{removeFromSaveList(index);});const animeItem=document.createElement('DIV');animeItem.appendChild(delButton);animeItem.appendChild(title);savedListContainer.appendChild(animeItem);});}
-renderSavedList();toolbar.appendChild(savedListContainer);animeStorage.savedList.onChange(()=>{renderSavedList();toolbar.appendChild(savedListContainer);});document.body.appendChild(toolbar);console.log(getPageInfo());}
-function buildMenu(){}
-let PAGE_TYPE;(function(PAGE_TYPE){PAGE_TYPE[PAGE_TYPE["ANIME_PAGE"]=0]="ANIME_PAGE";PAGE_TYPE[PAGE_TYPE["LIST_PAGE"]=1]="LIST_PAGE";PAGE_TYPE[PAGE_TYPE["INVALID"]=2]="INVALID";})(PAGE_TYPE||(PAGE_TYPE={}));function locationChanged(callback){window.addEventListener('locationchange',()=>callback());}
-function checkWeb(){if(window.location.pathname.search(/\/browse\/anime\/\d/)===0){return PAGE_TYPE.ANIME_PAGE;}
-if(window.location.pathname.search('/browse/anime')===0){return PAGE_TYPE.LIST_PAGE;}
+function injectToolbar(){const toolbar=document.createElement('div');toolbar.style.position='fixed';toolbar.style.top='72px';toolbar.style.right='16px';toolbar.style.background='var(--primary)';toolbar.style.borderRadius='.25rem';toolbar.style.boxShadow='0 0 4px 0px rgba(0,0,0,0.25)';toolbar.style.overflow='auto';const title=document.createElement('span');title.innerText='Saved list';title.style.marginLeft='2px';toolbarHeader.appendChild(title);toolbarHeader.style.padding='2px 2px';toolbar.appendChild(toolbarHeader);const savedListContainer=document.createElement('DIV');savedListContainer.style.background='#fff';savedListContainer.style.padding='2px';function renderSavedList(){const list=animeStorage.savedList.get();savedListContainer.innerHTML='';list.forEach((item,index)=>{const title=document.createElement('a');title.innerText=item.title;title.href=`${item.path}`;title.style.marginBottom='4px';title.style.paddingRight='2px';const delButton=document.createElement('button');delButton.innerText='🗑️';delButton.style.border='none';delButton.style.marginRight='2px';delButton.setAttribute('index',index.toString());delButton.addEventListener('click',()=>{removeFromSaveList(index);});const animeItem=document.createElement('DIV');animeItem.appendChild(delButton);animeItem.appendChild(title);savedListContainer.appendChild(animeItem);});toolbar.appendChild(savedListContainer);}
+renderSavedList();animeStorage.savedList.onChange(renderSavedList);onLocationChange(renderSavedList);document.body.appendChild(toolbar);}
+let PAGE_TYPE;(function(PAGE_TYPE){PAGE_TYPE[PAGE_TYPE["ANIME_PAGE"]=0]="ANIME_PAGE";PAGE_TYPE[PAGE_TYPE["LIST_PAGE"]=1]="LIST_PAGE";PAGE_TYPE[PAGE_TYPE["INVALID"]=2]="INVALID";})(PAGE_TYPE||(PAGE_TYPE={}));function onLocationChange(callback){if(typeof window!=='undefined'&&'navigation'in window){window.navigation.addEventListener('navigate',(ev)=>callback(ev));}}
+function checkWeb(path){const checkPath=path||window.location.pathname;if(checkPath.search(/\/browse\/anime\/\d/)===0){return PAGE_TYPE.ANIME_PAGE;}
+if(checkPath.search('/browse/anime')===0){return PAGE_TYPE.LIST_PAGE;}
 return PAGE_TYPE.INVALID;}
 function getPageInfo(){const pageType=checkWeb();const animeId=pageType===PAGE_TYPE.ANIME_PAGE&&window.location.pathname.split('/').length>=3?window.location.pathname.split('/')[3]:null;const storageIndex=pageType===PAGE_TYPE.ANIME_PAGE?animeStorage.savedList.get().findIndex((i)=>i.animeId===animeId):-1;return{type:pageType,path:window.location.pathname,animeId,isSamePage:storageIndex>-1,storageIndex,};}
-function injectTools(){if(checkWeb()===PAGE_TYPE.ANIME_PAGE){injectSaveButton();}
-injectToolbar();}
+function injectTools(){injectSaveButton();injectToolbar();}
 getStorage();injectTools();};loadMyList();
 

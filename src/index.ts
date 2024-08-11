@@ -91,8 +91,6 @@ const loadMyList = () => {
                     ...JSON.parse(storage)
                 }
 
-                console.log('after parsedStorage', parsedStorage)
-
                 if (!validateStructure(parsedStorage)) {
                     throw new Error('Invalid storage structure')
                 }
@@ -101,8 +99,6 @@ const loadMyList = () => {
                 parsedStorage = DEFAULT_STRORAGE
             }
         }
-
-        console.log('parsedStorage', parsedStorage)
 
         const _savedList = new Observable(parsedStorage.savedList)
 
@@ -128,7 +124,6 @@ const loadMyList = () => {
 
     function addToSavedList(anime: AnimeType) {
         if (animeStorage!.savedList.get().findIndex((i) => i.animeId === anime.animeId) > -1) {
-            console.log('Already exists')
             return
         }
 
@@ -157,13 +152,36 @@ const loadMyList = () => {
         saveToggleButton.style.borderRadius = '.25rem'
         saveToggleButton.style.marginRight = '4px'
 
-        const pageInfo = getPageInfo()
-        saveToggleButton.innerText = pageInfo.isSamePage ? '✅ Saved' : '➕ Save'
+        function renderSaveButton() {
+            const pageInfo = getPageInfo()
 
-        animeStorage?.savedList.onChange(() => {
+            if (pageInfo.type === PAGE_TYPE.ANIME_PAGE) {
+                saveToggleButton.style.display = 'inline-block'
+            } else {
+                saveToggleButton.style.display = 'none'
+            }
+        }
+
+        function renderSaveText() {
             const pageInfo = getPageInfo()
             saveToggleButton.innerText = pageInfo.isSamePage ? '✅ Saved' : '➕ Save'
+        }
+
+        renderSaveButton()
+        renderSaveText()
+
+        onLocationChange((ev) => {
+            const destinationUrl = new URL(ev!.destination.url)
+
+            if (checkWeb(destinationUrl.pathname) === PAGE_TYPE.ANIME_PAGE) {
+                saveToggleButton.style.display = 'inline-block'
+            } else {
+                saveToggleButton.style.display = 'none'
+            }
+
+            renderSaveText()
         })
+        animeStorage?.savedList.onChange(renderSaveText)
 
         saveToggleButton.addEventListener('click', () => {
             const pageInfo = getPageInfo()
@@ -176,12 +194,6 @@ const loadMyList = () => {
 
         const underCoverMenu = document.createElement('DIV')
         underCoverMenu.appendChild(saveToggleButton)
-
-        // I commented it because ... this component won't load during first paint
-        // const coverImgParent = document.querySelector<HTMLDivElement>('.info .img-cover')!.parentNode!
-        // const coverImgParent = document.querySelector<HTMLDivElement>('.info .info-col')
-        // coverImgParent!.appendChild(underCoverMenu)
-
         toolbarHeader.appendChild(saveToggleButton)
     }
 
@@ -198,9 +210,10 @@ const loadMyList = () => {
 
         const title = document.createElement('span')
         title.innerText = 'Saved list'
+        title.style.marginLeft = '2px'
 
         toolbarHeader.appendChild(title)
-        toolbarHeader.style.padding = '0px 4px'
+        toolbarHeader.style.padding = '2px 2px'
 
         toolbar.appendChild(toolbarHeader)
 
@@ -238,39 +251,38 @@ const loadMyList = () => {
 
                 savedListContainer.appendChild(animeItem)
             })
+            toolbar.appendChild(savedListContainer)
         }
 
         // First loaded
         renderSavedList()
-        toolbar.appendChild(savedListContainer)
 
         // Trigger on saved list changed
-        animeStorage!.savedList.onChange(() => {
-            renderSavedList()
-            toolbar.appendChild(savedListContainer)
-        })
+        animeStorage!.savedList.onChange(renderSavedList)
+
+        // On location changed
+        onLocationChange(renderSavedList)
 
         document.body.appendChild(toolbar)
-        console.log(getPageInfo())
     }
-
-    function buildMenu() {}
 
     // Check page type
     enum PAGE_TYPE {
         ANIME_PAGE, LIST_PAGE, INVALID
     }
 
-    function locationChanged(callback: Function) {
-        // window.navigation.addEventListener("navigate", callback)
-        window.addEventListener('locationchange', () => callback())
+    function onLocationChange(callback: (ev?: NavigateEvent) => void) {
+        if (typeof window !== 'undefined' && 'navigation' in window) {
+            window.navigation.addEventListener('navigate', (ev) => callback(ev))
+        }
     }
 
-    function checkWeb(): PAGE_TYPE {
-        if (window.location.pathname.search(/\/browse\/anime\/\d/) === 0) {
+    function checkWeb(path?: string): PAGE_TYPE {
+        const checkPath = path || window.location.pathname
+        if (checkPath.search(/\/browse\/anime\/\d/) === 0) {
             return PAGE_TYPE.ANIME_PAGE
         }
-        if (window.location.pathname.search('/browse/anime') === 0) {
+        if (checkPath.search('/browse/anime') === 0) {
             return PAGE_TYPE.LIST_PAGE
         }
 
@@ -293,9 +305,10 @@ const loadMyList = () => {
 
     // Inject tool for each
     function injectTools() {
-        if (checkWeb() === PAGE_TYPE.ANIME_PAGE) {
-            injectSaveButton()
-        }
+        // if (checkWeb() === PAGE_TYPE.ANIME_PAGE) {
+
+        // }
+        injectSaveButton()
         injectToolbar()
     }
 

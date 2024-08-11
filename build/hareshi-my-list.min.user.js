@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         Hareshi - My List
-// @match        https://www.hareshi.net/browse/anime*
+// @match        https://www.hareshi.net/*
 // @description  Hareshi's Saved list
 // @namespace    jirachai.me
-// @version      2024-08-11
+// @version      2024_08_11-03
 // @author       Jirachai Chansivanon
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=hareshi.net
-// @downloadURL  https://raw.githubusercontent.com/antronic/hareshi-my-list/main/build/hareshi-my-list.tampermonkey.min.js
-// @version      0.1
+// @updateURL    https://github.com/antronic/hareshi-my-list/raw/main/build/hareshi-my-list.min.user.js
+// @downloadURL  https://github.com/antronic/hareshi-my-list/raw/main/build/hareshi-my-list.min.user.js
 // @grant        none
 // ==/UserScript==
 

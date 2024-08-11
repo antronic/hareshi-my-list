@@ -4,13 +4,14 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
+    "build": "tsc && jsmin -o hareshi-my-list.min.js ./dist/index.js",
     "dev": "tsc -w"
   },
   "author": "Jirachai Chansivanon <jirachai.c@outlook.com>",
   "license": "MIT",
   "description": "",
   "devDependencies": {
+    "jsmin": "^1.0.1",
     "typescript": "^5.5.4"
   }
 }

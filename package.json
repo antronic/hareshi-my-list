@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && jsmin -o hareshi-my-list.min.js ./dist/index.js",
+    "build": "tsc && jsmin -o ./build/hareshi-my-list.min.js ./dist/index.js && ./scripts/add-tampermonkey-header.sh",
     "dev": "tsc -w"
   },
   "author": "Jirachai Chansivanon <jirachai.c@outlook.com>",

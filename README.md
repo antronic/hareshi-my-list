@@ -31,6 +31,26 @@ If you have other script runner methods, please feel free to use them and share 
 
 ### If you’re ready to proceed, follow the instructions below:
 
+### For [Tampermonkey](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
+
+1. Install [Tampermonkey](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
+
+2. Allow ["Developer mode"](chrome://extensions/)
+- To learn why this is necessary, read this FAQ:
+[Q209: Developer mode to run userscripts](https://www.tampermonkey.net/faq.php#Q209)
+
+3. Click "Create a new script" from the Tampermonkey menu
+
+4. Copy the source code from `build/hareshi-my-list.tampermonkey.min.js` and paste in the editor.
+
+5. Save it `File > Save`
+
+6. Try to use on your interested anime on [Hareshi](https://www.hareshi.net/browse/anime/)
+
+Try this: [https://www.hareshi.net/browse/anime/162804](https://www.hareshi.net/browse/anime/162804)
+
+### For other tools and developer
+
 1. Clone this project
 
 2. Install npm package
@@ -43,37 +63,11 @@ $ npm install
 $ npm run build
 ```
 
-4. Install [Tampermonkey](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
+4. You can find the output:
+- Non-minify: `dist/index.js`
+- Minify: `build/hareshi-my-list.min.js`
+- For TamperMonkey: `build/hareshi-my-list.tapermonkey.min.js`
 
-5. Allow ["Developer mode"](chrome://extensions/)
-- To learn why this is necessary, read this FAQ:
-[Q209: Developer mode to run userscripts](https://www.tampermonkey.net/faq.php#Q209)
-
-6. Click "Create a new script" from the Tampermonkey menu
-
-7. Copy the source code from `hareshi-my-list.min.js` and paste in the editor.
-By patse inside the `(function() { .... })()`
-
-Like this:
-
-```javascript
-(function() {
-    // Patse the code here...
-})();
-```
-
-8. Change the `@match` URL to allow this script run on specific website
-
-- On line 7, modify the code as shown below:
-```javascript
-// @match        https://www.hareshi.net/browse/anime*
-```
-
-9. (Optional) Change your script name on line 2
-
-10. Try to use on your interested anime on [Hareshi](https://www.hareshi.net/browse/anime/)
-
-Try this: [https://www.hareshi.net/browse/anime/162804](https://www.hareshi.net/browse/anime/162804)
 
 ## Confession
 The UX and UI may not make sense in some parts. I apologize for that, as I was a bit too lazy = 3=

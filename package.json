@@ -1,0 +1,14 @@
+{
+  "name": "hareshi-mylist",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jirachai Chansivanon <jirachai.c@outlook.com>",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}

@@ -7,10 +7,13 @@ However, it doesn’t include a “favorite” or "saved list" feature, which is
 
 ## Feature
 - Save your interested anime
-  - [Note] **"+ Save"** will only appear on the anime information page.
+  - **"+ Save"** will only appear on the anime information page.
 - View your saved list
   - The saved list is stored in `localStorage`
 - [Upcoming - when I'm not lazy] - Hide or collapse the list
+
+## 🪲 Known bugs
+- [ ] List doesn't update on page changed
 
 ## Usage
 

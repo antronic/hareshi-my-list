@@ -257,6 +257,11 @@ const loadMyList = () => {
         ANIME_PAGE, LIST_PAGE, INVALID
     }
 
+    function locationChanged(callback: Function) {
+        // window.navigation.addEventListener("navigate", callback)
+        window.addEventListener('locationchange', () => callback())
+    }
+
     function checkWeb(): PAGE_TYPE {
         if (window.location.pathname.search(/\/browse\/anime\/\d/) === 0) {
             return PAGE_TYPE.ANIME_PAGE

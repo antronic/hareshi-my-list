@@ -1,6 +1,6 @@
 # Hareshi - My list (Chrome script)
 
-Hareshi is an anime directory website that provides a comprehensive list of anime and channels to watch them.
+[Hareshi](https://www.hareshi.net/) is an anime directory website that provides a comprehensive list of anime and channels to watch them.
 However, it doesn’t include a “favorite” or "saved list" feature, which is why I built this script.
 
 ![](/images/hero.png)

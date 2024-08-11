@@ -41,7 +41,7 @@ If you have other script runner methods, please feel free to use them and share 
 
 3. Click "Create a new script" from the Tampermonkey menu
 
-4. Copy the source code from `build/hareshi-my-list.tampermonkey.min.js` and paste in the editor.
+4. Copy the source code from `build/hareshi-my-list.min.user.js` and paste in the editor.
 
 5. Save it `File > Save`
 
@@ -66,7 +66,7 @@ $ npm run build
 4. You can find the output:
 - Non-minify: `dist/index.js`
 - Minify: `build/hareshi-my-list.min.js`
-- For TamperMonkey: `build/hareshi-my-list.tapermonkey.min.js`
+- For TamperMonkey: `build/hareshi-my-list.min.user.js`
 
 
 ## Confession

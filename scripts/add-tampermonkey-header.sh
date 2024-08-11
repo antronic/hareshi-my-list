@@ -13,4 +13,4 @@ echo -e "// ==UserScript==
 // @grant        none
 // ==/UserScript==
 \n$(cat build/hareshi-my-list.min.js)
-" > build/hareshi-my-list.tampermonkey.min.js
+" > build/hareshi-my-list.min.user.js

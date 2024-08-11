@@ -193,6 +193,8 @@ const loadMyList = () => {
         toolbar.style.right = '16px'
         toolbar.style.background = 'var(--primary)'
         toolbar.style.borderRadius = '.25rem'
+        toolbar.style.boxShadow = '0 0 4px 0px rgba(0,0,0,0.25)'
+        toolbar.style.overflow = 'auto'
 
         const title = document.createElement('span')
         title.innerText = 'Saved list'
@@ -219,6 +221,7 @@ const loadMyList = () => {
                 title.innerText = item.title
                 title.href = `${item.path}`
                 title.style.marginBottom = '4px'
+                title.style.paddingRight = '2px'
 
                 const delButton: HTMLButtonElement = document.createElement('button')
                 delButton.innerText = '🗑️'

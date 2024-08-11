@@ -21,6 +21,23 @@ I’m kind of a lazy person, so I don’t want to mess around with creating a Go
 
 So, I decided not to build this as an extension but instead to use an existing script runner like ["Tampermonkey"](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo) to run my script
 
+### For [Tampermonkey](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo) user
+
+1. Install [Tampermonkey](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
+
+2. Allow ["Developer mode"](chrome://extensions/)
+- To learn why this is necessary, read this FAQ:
+[Q209: Developer mode to run userscripts](https://www.tampermonkey.net/faq.php#Q209)
+
+3. Install from the button below or this [link](https://github.com/antronic/hareshi-my-list/raw/main/build/hareshi-my-list.min.user.js)
+
+[![](/images/add-to-tampermonkey.png)](https://github.com/antronic/hareshi-my-list/raw/main/build/hareshi-my-list.min.user.js)
+
+4. Then click **Install**
+
+![](/images/add-to-tampermoney-step.jpg)
+
+
 > ## ! CAUTION !!
 >
 > Using Tampermonkey comes with some security concerns, as it allows users to add any script, including malicious ones, which could harm your computer, browser, or even steal your cookies, credentials, and sensitive data.
@@ -29,25 +46,7 @@ So, I decided not to build this as an extension but instead to use an existing s
 
 If you have other script runner methods, please feel free to use them and share your experience in this GitHub repository.
 
-### If you’re ready to proceed, follow the instructions below:
-
-### For [Tampermonkey](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-
-1. Install [Tampermonkey](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-
-2. Allow ["Developer mode"](chrome://extensions/)
-- To learn why this is necessary, read this FAQ:
-[Q209: Developer mode to run userscripts](https://www.tampermonkey.net/faq.php#Q209)
-
-3. Click "Create a new script" from the Tampermonkey menu
-
-4. Copy the source code from `build/hareshi-my-list.min.user.js` and paste in the editor.
-
-5. Save it `File > Save`
-
-6. Try to use on your interested anime on [Hareshi](https://www.hareshi.net/browse/anime/)
-
-Try this: [https://www.hareshi.net/browse/anime/162804](https://www.hareshi.net/browse/anime/162804)
+**If you’re ready to proceed, follow the instructions below:**
 
 ### For other tools and developer
 
@@ -63,7 +62,7 @@ $ npm install
 $ npm run build
 ```
 
-4. You can find the output:
+4. You can use the source code from these:
 - Non-minify: `dist/index.js`
 - Minify: `build/hareshi-my-list.min.js`
 - For TamperMonkey: `build/hareshi-my-list.min.user.js`

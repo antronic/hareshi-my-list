@@ -146,7 +146,8 @@ const loadMyList = () => {
     }
 
     // Inject save button on anime info page
-    const toolbar = document.createElement('DIV')
+    const toolbarHeader = document.createElement('div')
+
     function injectSaveButton() {
 
         const saveToggleButton = document.createElement('BUTTON')
@@ -180,11 +181,12 @@ const loadMyList = () => {
         // const coverImgParent = document.querySelector<HTMLDivElement>('.info .info-col')
         // coverImgParent!.appendChild(underCoverMenu)
 
-        toolbar.appendChild(saveToggleButton)
+        toolbarHeader.appendChild(saveToggleButton)
     }
 
     // Inject tool bar
     function injectToolbar() {
+        const toolbar = document.createElement('div')
         toolbar.style.position = 'fixed'
         toolbar.style.top = '72px'
         toolbar.style.right = '16px'
@@ -194,7 +196,10 @@ const loadMyList = () => {
         const title = document.createElement('span')
         title.innerText = 'Saved list'
 
-        toolbar.appendChild(title)
+        toolbarHeader.appendChild(title)
+        toolbarHeader.style.padding = '0px 4px'
+
+        toolbar.appendChild(toolbarHeader)
 
         // Create SavedList Container
         const savedListContainer = document.createElement('DIV')

@@ -3,7 +3,7 @@
 // @match        https://www.hareshi.net/*
 // @description  Hareshi's Saved list
 // @namespace    jirachai.me
-// @version      2024_08_11-03
+// @version      2024_08_11-04
 // @author       Jirachai Chansivanon
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=hareshi.net
 // @updateURL    https://github.com/antronic/hareshi-my-list/raw/main/build/hareshi-my-list.min.user.js

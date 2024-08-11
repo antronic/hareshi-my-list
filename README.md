@@ -50,7 +50,6 @@ So, I decided not to build this as an extension but instead to use an existing s
 
 If you have other script runner methods, please feel free to use them and share your experience in this GitHub repository.
 
-**If you’re ready to proceed, follow the instructions below:**
 
 ### For other tools and developer
 

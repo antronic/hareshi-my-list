@@ -51,7 +51,7 @@ $ npm run build
 
 6. Click "Create a new script" from the Tampermonkey menu
 
-7. Copy the source code from `dist/index.js` and paste in the editor.
+7. Copy the source code from `hareshi-my-list.min.js` and paste in the editor.
 By patse inside the `(function() { .... })()`
 
 Like this:

@@ -31,7 +31,7 @@ So, I decided not to build this as an extension but instead to use an existing s
 
 3. Install from the button below or this [link](https://github.com/antronic/hareshi-my-list/raw/main/build/hareshi-my-list.min.user.js)
 
-[![](/images/add-to-tampermonkey.png)](https://github.com/antronic/hareshi-my-list/raw/main/build/hareshi-my-list.min.user.js)
+[![](/images/add-to-tampermonkey-btn.png)](https://github.com/antronic/hareshi-my-list/raw/main/build/hareshi-my-list.min.user.js)
 
 4. Then click **Install**
 

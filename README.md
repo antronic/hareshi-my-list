@@ -9,7 +9,7 @@ However, it doesn’t include a “favorite” or "saved list" feature, which is
 
 ![](/images/hero.png)
 
-## Feature
+## Features
 - Save your interested anime
   - **"+ Save"** will only appear on the anime information page.
 - View your saved list

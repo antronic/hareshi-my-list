@@ -5,12 +5,11 @@ echo -e "// ==UserScript==
 // @match        https://www.hareshi.net/*
 // @description  Hareshi's Saved list
 // @namespace    jirachai.me
-// @version      $(date '+%Y-%m-%d')
+// @version      $(date '+%Y_%m_%d')-03
 // @author       Jirachai Chansivanon
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=hareshi.net
 // @updateURL    https://github.com/antronic/hareshi-my-list/raw/main/build/hareshi-my-list.min.user.js
 // @downloadURL  https://github.com/antronic/hareshi-my-list/raw/main/build/hareshi-my-list.min.user.js
-// @version      0.3
 // @grant        none
 // ==/UserScript==
 \n$(cat build/hareshi-my-list.min.js)

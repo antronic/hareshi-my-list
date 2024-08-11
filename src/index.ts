@@ -137,7 +137,7 @@ const loadMyList = () => {
 
     function removeFromSaveList(storageIndex?: number) {
         const pageInfo = getPageInfo()
-        const index = storageIndex || pageInfo.storageIndex
+        const index = storageIndex === undefined ? pageInfo.storageIndex : storageIndex
         animeStorage!.savedList.update((saved: AnimeType[]): AnimeType[] => [
             ...saved.slice(0, index),
             ...saved.slice(index + 1),
@@ -223,6 +223,7 @@ const loadMyList = () => {
                 delButton.innerText = '🗑️'
                 delButton.style.border = 'none'
                 delButton.style.marginRight = '2px'
+                delButton.setAttribute('index', index.toString())
                 delButton.addEventListener('click', () => {
                     removeFromSaveList(index)
                 })

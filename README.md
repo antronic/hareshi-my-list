@@ -69,7 +69,9 @@ $ npm run build
 
 
 ## Confession
-The UX and UI may not make sense in some parts. I apologize for that, as I was a bit too lazy = 3=
+The UX and UI may not make sense in some parts including the code itself as well. I apologize for that, as I was a bit too lazy = 3=
+
+And you may also notice that I put some what the -- stuff inside about "`Observable` class", this is my experimental on using [`Event API`](https://developer.mozilla.org/en-US/docs/Web/API/Event). You can try and learn more about it as well.
 
 So, if anyone is interested in adding more features or making improvements, please feel free to fork and contribute~!
 
